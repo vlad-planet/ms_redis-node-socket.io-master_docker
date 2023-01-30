@@ -1,0 +1,32 @@
+# docker-compose.yml
+version: '3'
+services:
+  nginx:
+    image: nginx
+    volumes:
+      - ./nginx/conf/custom.conf:/etc/nginx/conf.d/default.conf
+      - ./www:/www
+    ports:
+      - 4400:80
+  php:
+    build: ./php
+    volumes:
+      - ./www:/www
+  redis:
+    image: redis
+    command: ["sh", "-c", "exec redis-server --requirepass \"${REDIS_PASSWORD}\""]
+  socket_io:
+    image: node
+    user: "node"
+    volumes:
+      - ./socket:/home/node/app
+    working_dir: /home/node/app
+    ports:
+      - 5000:5000
+    command: "npm start"
+  client:
+    image: nginx
+    volumes:
+      - ./client:/usr/share/nginx/html
+    ports:
+      - 8000:80
