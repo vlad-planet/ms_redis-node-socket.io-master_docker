@@ -1,6 +1,6 @@
- microservices
+microservices
 
-# NodeJS Socket.io, Redis и PHP
+# NodeJS Socket.io, Redis и PHP.
 
 Для передачи данных сервером на php клиенту можно использовать следующий алгоритм:
 1. Сервер php публикует данные в канал redis.
